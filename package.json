@@ -1,0 +1,24 @@
+{
+  "name": "phoenix-graphql-server",
+  "version": "0.0.1",
+  "description": "This is the graphql server that powers the Phoenix Network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StormFireTechnologies/PhoenixGraphQLServer.git"
+  },
+  "keywords": [
+    "GraphQL",
+    "Server",
+    "NodeJS"
+  ],
+  "author": "Joshuah J Charney",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/StormFireTechnologies/PhoenixGraphQLServer/issues"
+  },
+  "homepage": "https://github.com/StormFireTechnologies/PhoenixGraphQLServer#readme"
+}
