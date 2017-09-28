@@ -2,7 +2,6 @@ export default {
   Gamer: {
     async activities(parent, args, { datastore }) {
       const response = await datastore.getAll('Activity', 'creator', parent.id);
-      console.log(response[0]);
       return response[0];
     },
   },
@@ -23,7 +22,21 @@ export default {
   ActivityComment: {
     async commentor(parent, args, { datastore }) {
       const response = await datastore.getItem('Gamer', parent.commentor);
-      console.log(response[0]);
+      console.log('Activity Comment: ' + response[0]);
+      return response[0];
+    },
+  },
+  Challenge: {
+    async game(parent, args, { datastore }) {
+      const response = await datastore.getItem('Game', parent.game);
+      return response[0];
+    },
+    participants(parent, args, { datastore }) {
+      const response = datastore.getAll('Gamer', 'challenges', parent.id);
+      return response[0];
+    },
+    reward(parent, args, { datastore }) {
+      const response = datastore.getAll('Reward', 'challenge', parent.id);
       return response[0];
     },
   },
@@ -45,7 +58,6 @@ export default {
     },
     async submitActivity(parent, args, { datastore }) {
       const response = await datastore.putItem('Activity', args.activity.id, args.activity);
-      console.log(response[0]);
       return response[0].activity;
     },
     async deleteActivity(parent, args, { datastore }) {
@@ -58,6 +70,10 @@ export default {
         console.log(args.id);
       }
     },
+    async updateActivity(parent, { activityId, activity }, { datastore }) {
+      const response = await datastore.updateItem('Activity', activityId, activity);
+      return response[0].activity;
+    }
     async likeActivity(parent, args, { datastore }) {
       const response = await datastore.putItem('Like', args.like.id, args);
       return response[0].like;
@@ -68,8 +84,15 @@ export default {
     },
     async commentActivity(parent, args, { datastore }) {
       const response = await datastore.putItem('Comment', args.comment.id, args.comment);
-      console.log(response[0].comment);
       return response[0].comment;
+    },
+    async createChallenge(parent, args, { datastore }) {
+      const response = await datastore.putItem('Challenge', args.challenge.id, args.challenge);
+      console.log(response[0]);
+      console.log(response[0].challenge);
+    },
+    async deleteChallenge(parent, args, { datastore }) {
+      const response = await datastore.deleteItem('Challenge', args.id);
     },
   },
 };
