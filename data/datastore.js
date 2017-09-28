@@ -30,6 +30,16 @@ const datastore = {
     return results;
   },
 
+  updateItem: function(kind, id, data) {
+    const key = this.db.key([kind, id]);
+    const entity = {
+      key: key,
+      data: data
+    };
+    const results = this.db.upsert(entity);
+    return results;
+  },
+
   deleteItem: async function(kind, id) {
     const key = this.db.key([kind, id]);
     const dbResults = await this.db.delete(key);
