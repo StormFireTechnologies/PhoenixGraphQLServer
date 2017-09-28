@@ -31,12 +31,12 @@ export default {
       const response = await datastore.getItem('Game', parent.game);
       return response[0];
     },
-    participants(parent, args, { datastore }) {
-      const response = datastore.getAll('Gamer', 'challenges', parent.id);
+    async participants(parent, args, { datastore }) {
+      const response = await datastore.getAll('Gamer', 'challenges', parent.id);
       return response[0];
     },
-    reward(parent, args, { datastore }) {
-      const response = datastore.getAll('Reward', 'challenge', parent.id);
+    async reward(parent, args, { datastore }) {
+      const response = await datastore.getAll('Reward', 'challenge', parent.id);
       return response[0];
     },
   },
@@ -90,9 +90,14 @@ export default {
       const response = await datastore.putItem('Challenge', args.challenge.id, args.challenge);
       console.log(response[0]);
       console.log(response[0].challenge);
+      return response[0].challenge;
     },
     async deleteChallenge(parent, args, { datastore }) {
       const response = await datastore.deleteItem('Challenge', args.id);
+    },
+    async updateChallenge(parent, { id, challenge }, { datastore }) {
+      const response = await datastore.updateItem('Challenge', id, challenge);
+      return response[0].challenge;
     },
   },
 };
