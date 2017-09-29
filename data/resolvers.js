@@ -1,6 +1,7 @@
 export default {
   Gamer: {
-    async activities(parent, args, { datastore }) {
+    async activities(parent, args, { datastore, viewer }) {
+      console.log(viewer);
       const response = await datastore.getAll('Activity', 'creator', parent.id);
       return response[0];
     },
@@ -22,7 +23,6 @@ export default {
   ActivityComment: {
     async commentor(parent, args, { datastore }) {
       const response = await datastore.getItem('Gamer', parent.commentor);
-      console.log('Activity Comment: ' + response[0]);
       return response[0];
     },
   },
@@ -35,7 +35,7 @@ export default {
       const response = await datastore.getAll('Gamer', 'challenges', parent.id);
       return response[0];
     },
-    async reward(parent, args, { datastore }) {
+    async rewards(parent, args, { datastore }) {
       const response = await datastore.getAll('Reward', 'challenge', parent.id);
       return response[0];
     },
@@ -73,7 +73,7 @@ export default {
     async updateActivity(parent, { activityId, activity }, { datastore }) {
       const response = await datastore.updateItem('Activity', activityId, activity);
       return response[0].activity;
-    }
+    },
     async likeActivity(parent, args, { datastore }) {
       const response = await datastore.putItem('Like', args.like.id, args);
       return response[0].like;
