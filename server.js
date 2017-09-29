@@ -33,7 +33,7 @@ const GRAPHQL_PORT = 8080;
 const graphQLServer = express();
 
 graphQLServer.use(cors());
-graphQLServer.use(addViewer);
+// graphQLServer.use(addViewer);
 
 graphQLServer.use('/graph', bodyParser.json(), addViewer, graphqlExpress(req => ({ schema, context: { datastore, viewer: req.viewer } })));
 graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/graph' }));
