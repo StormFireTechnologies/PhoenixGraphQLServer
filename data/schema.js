@@ -6,6 +6,8 @@ import Like from './types/like';
 import Dislike from './types/dislike';
 import ActivityComment from './types/comment';
 import Challenge from './types/challenge';
+import Game from './types/game';
+import Reward from './types/reward';
 
 import resolvers from './resolvers'
 
@@ -16,6 +18,7 @@ const RootQuery = `
   }
 
   type RootMutation {
+    loginGamer(login: String!): String
     createGamer(gamer: GamerInput!): Gamer
     submitActivity(activity: ActivityInput!): Activity
     deleteActivity(activityId: String!): Activity
@@ -25,6 +28,7 @@ const RootQuery = `
     commentActivity(comment: CommentInput!, activityId: String!): ActivityComment
     createChallenge(challenge: ChallengeInput!): Challenge
     deleteChallenge(id: String!): Challenge
+    updateChallenge(id:String!, challenge: ChallengeUpdateInput!): Challenge
   }
 `;
 
@@ -82,7 +86,8 @@ const InputDef = `
   input ChallengeInput {
     id: String!
     creator: String!
-    timeCreated: String!
+    createdAt: String!
+    title: String!
     participants: [String!]
     game: String!
     objective: String!
@@ -92,10 +97,22 @@ const InputDef = `
     placements: [String]
     rewards: [String!]
   }
+
+  input ChallengeUpdateInput {
+    title: String
+    participants: [String]
+    game: String
+    objective: String
+    goal: Int
+    timeStart: String
+    timeEnd: String
+    placements: [String]
+    rewards: [String]
+  }
 `;
 
 const schema = makeExecutableSchema({
-  typeDefs: [SchemaDef, RootQuery, Activity, Gamer, InputDef, Like, Dislike, ActivityComment, Challenge],
+  typeDefs: [SchemaDef, RootQuery, Activity, Gamer, InputDef, Like, Dislike, ActivityComment, Challenge, Game, Reward],
   resolvers,
 });
 

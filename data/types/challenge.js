@@ -2,8 +2,9 @@ const Challenge =`
   type Challenge {
     id: String!
     creator: String
+    title: String
     game: Game
-    timeCreated: String
+    createdAt: String
     timeStart: String
     timeEnd: String
     objective: String
@@ -13,3 +14,5 @@ const Challenge =`
     rewards: [Reward]
   }
 `;
+
+export default Challenge;
