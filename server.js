@@ -35,7 +35,7 @@ const graphQLServer = express();
 graphQLServer.use(cors());
 // graphQLServer.use(addViewer);
 
-graphQLServer.use('/graph', bodyParser.json(), addViewer, graphqlExpress(req => ({ schema, context: { datastore, viewer: req.viewer } })));
+graphQLServer.use('/graph', bodyParser.json(), graphqlExpress(req => ({ schema, context: { datastore, viewer: req.viewer } })));
 graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/graph' }));
 
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(
