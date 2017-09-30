@@ -15,8 +15,6 @@ const datastore = {
   getAll: async function(kind, property, id) {
     const query = this.db.createQuery(kind).filter(property, '=', id);
     const results = this.db.runQuery(query);
-    console.log(results);
-
     return results;
   },
 
